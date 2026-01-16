@@ -26,16 +26,13 @@
     content="Full-Stack Software Developer building scalable web and mobile applications using modern technologies.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://yashwaghadhare.github.io/yash/">
-  <meta property="og:image"
-    content="https://yashwaghadhare.github.io/yash/assets/img/profile/yashwaghadhare.webp">
+  <meta property="og:image" content="https://yashwaghadhare.github.io/yash/assets/img/profile/yashwaghadhare.webp">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Yash Waghadhare | Full-Stack Software Developer">
-  <meta name="twitter:description"
-    content="Portfolio of Yash Waghadhare – Full-Stack Software Developer">
-  <meta name="twitter:image"
-    content="https://yashwaghadhare.github.io/yash/assets/img/profile/yashwaghadhare.webp">
+  <meta name="twitter:description" content="Portfolio of Yash Waghadhare – Full-Stack Software Developer">
+  <meta name="twitter:image" content="https://yashwaghadhare.github.io/yash/assets/img/profile/yashwaghadhare.webp">
 
   <!-- Favicons -->
   <link rel="icon" href="assets/img/favicon.ico">
@@ -158,8 +155,7 @@
 
               <div class="social-links" data-aos="fade-up" data-aos-delay="400">
                 <!-- <a href="#"><i class="bi bi-twitter"></i></a> -->
-                <a target="_blank" href="https://www.linkedin.com/in/yashwaghadhare/"><i
-                    class="bi bi-linkedin"></i></a>
+                <a target="_blank" href="https://www.linkedin.com/in/yashwaghadhare/"><i class="bi bi-linkedin"></i></a>
                 <a target="_blank" href="https://github.com/yashwaghadhare"><i class="bi bi-github"></i></a>
                 <!-- <a href="#"><i class="bi bi-instagram"></i></a> -->
               </div>
@@ -270,7 +266,8 @@
                 <div class="action-buttons">
                   <a target="_blank" href="https://www.linkedin.com/in/yashwaghadhare/recent-activity/all/"
                     class="btn btn-primary">View My Work</a>
-                  <a href="https://drive.google.com/drive/folders/1UrOTM_MSyyTPhrkh8ZnpV-RsNtomlCt_?usp=sharing" target="_blank" class="btn btn-outline">Download Resume</a>
+                  <a href="https://drive.google.com/drive/folders/1UrOTM_MSyyTPhrkh8ZnpV-RsNtomlCt_?usp=sharing"
+                    target="_blank" class="btn btn-outline">Download Resume</a>
                 </div>
               </div>
 
@@ -924,19 +921,33 @@
       const message = document.getElementById("message").value;
 
       const body =
-        `Name: ${name}\n` +
-        `Email: ${email}\n\n` +
-        `${message}`;
+        "Name: " + name + "\n" +
+        "Email: " + email + "\n\n" +
+        message;
 
-      const gmailURL =
+      const mailtoURL =
+        "mailto:contact.yashwaghadhare@gmail.com" +
+        "?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(body);
+
+      const gmailWeb =
         "https://mail.google.com/mail/?view=cm&fs=1" +
         "&to=contact.yashwaghadhare@gmail.com" +
         "&su=" + encodeURIComponent(subject) +
         "&body=" + encodeURIComponent(body);
 
-      window.open(gmailURL, "_blank");
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+      if (isMobile) {
+        // Mobile → open mail app (Gmail on most phones)
+        window.location.href = mailtoURL;
+      } else {
+        // Desktop → force Gmail Web (avoid Outlook)
+        window.open(gmailWeb, "_blank");
+      }
     }
   </script>
+
 
   <script>
     document.getElementById("currentYear").textContent = new Date().getFullYear();
