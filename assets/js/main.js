@@ -72,6 +72,7 @@ window.addEventListener('scroll', function () {
 (function initNav() {
   const navbar = document.getElementById('navbar');
   const hamburger = document.getElementById('hamburger');
+  const navClose = document.getElementById('nav-close');
   const navLinks = document.getElementById('nav-links');
 
   window.addEventListener('scroll', function () {
@@ -80,18 +81,23 @@ window.addEventListener('scroll', function () {
     updateActiveLink();
   }, { passive: true });
 
-  hamburger.addEventListener('click', function () {
-    const open = hamburger.classList.toggle('open');
-    navLinks.classList.toggle('open', open);
-    hamburger.setAttribute('aria-expanded', open);
-  });
+  function openNav() {
+    navLinks.classList.add('open');
+    navbar.classList.add('nav-open');
+    hamburger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closeNav() {
+    navLinks.classList.remove('open');
+    navbar.classList.remove('nav-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+  }
+
+  hamburger.addEventListener('click', openNav);
+  navClose.addEventListener('click', closeNav);
 
   navLinks.querySelectorAll('.nav-link').forEach(function (link) {
-    link.addEventListener('click', function () {
-      hamburger.classList.remove('open');
-      navLinks.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
-    });
+    link.addEventListener('click', closeNav);
   });
 })();
 
@@ -115,6 +121,7 @@ function updateActiveLink() {
 (function initThreeJS() {
   if (typeof THREE === 'undefined') return;
 
+  var isMobile = window.innerWidth <= 767;
   var canvas = document.getElementById('hero-canvas');
   var hero = document.querySelector('.hero');
   var W = hero.offsetWidth, H = hero.offsetHeight;
@@ -123,9 +130,9 @@ function updateActiveLink() {
   var camera = new THREE.PerspectiveCamera(65, W / H, 0.1, 100);
   camera.position.z = 3;
 
-  var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+  var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: !isMobile });
   renderer.setSize(W, H);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
   renderer.setClearColor(0x000000, 0);
 
   /* ── Outer morphing blob ── */
@@ -152,7 +159,7 @@ function updateActiveLink() {
   scene.add(ring);
 
   /* ── Background particles ── */
-  var pCount = 2200;
+  var pCount = isMobile ? 600 : 2200;
   var pPos = new Float32Array(pCount * 3);
   var pCol = new Float32Array(pCount * 3);
   for (var i = 0; i < pCount; i++) {
@@ -193,20 +200,24 @@ function updateActiveLink() {
   }, { passive: true });
 
   /* ── Animate ── */
-  var clk = 0;
+  var clk = 0, frameCount = 0;
   function animate() {
     requestAnimationFrame(animate);
     clk += 0.007;
+    frameCount++;
 
-    var bpos = blob.geometry.attributes.position;
-    for (var j = 0; j < bpos.count; j++) {
-      var ox = blobOrig[j * 3], oy = blobOrig[j * 3 + 1], oz = blobOrig[j * 3 + 2];
-      var ln = Math.sqrt(ox * ox + oy * oy + oz * oz);
-      var nx = ox / ln, ny = oy / ln, nz = oz / ln;
-      var n = Math.sin(nx * 5 + clk * 1.4) * 0.045 + Math.cos(ny * 6 + clk * 0.8) * 0.035 + Math.sin(nz * 4 + clk * 1.9) * 0.03;
-      bpos.setXYZ(j, nx * (0.7 + n), ny * (0.7 + n), nz * (0.7 + n));
+    // On mobile, morph vertices every other frame — visually identical, half the CPU
+    if (!isMobile || frameCount % 2 === 0) {
+      var bpos = blob.geometry.attributes.position;
+      for (var j = 0; j < bpos.count; j++) {
+        var ox = blobOrig[j * 3], oy = blobOrig[j * 3 + 1], oz = blobOrig[j * 3 + 2];
+        var ln = Math.sqrt(ox * ox + oy * oy + oz * oz);
+        var nx = ox / ln, ny = oy / ln, nz = oz / ln;
+        var n = Math.sin(nx * 5 + clk * 1.4) * 0.045 + Math.cos(ny * 6 + clk * 0.8) * 0.035 + Math.sin(nz * 4 + clk * 1.9) * 0.03;
+        bpos.setXYZ(j, nx * (0.7 + n), ny * (0.7 + n), nz * (0.7 + n));
+      }
+      bpos.needsUpdate = true;
     }
-    bpos.needsUpdate = true;
 
     blob.rotation.y += 0.005; blob.rotation.z += 0.003;
     inner.rotation.x -= 0.006; inner.rotation.y -= 0.004;
@@ -523,3 +534,12 @@ document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     }, (1300 + i * 80));
   });
 })();
+
+/* ════════════════════════════════════════════
+   SERVICE WORKER — cache for fast repeat loads
+════════════════════════════════════════════ */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js').catch(function () {});
+  });
+}

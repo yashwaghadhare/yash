@@ -358,7 +358,8 @@ h4 {
   margin-left: 1rem;
 }
 
-.hamburger {
+/* ── Hamburger button (≡) ── */
+.nav-ham {
   display: none;
   flex-direction: column;
   gap: 5px;
@@ -368,29 +369,33 @@ h4 {
   justify-content: center;
   border-radius: var(--radius-sm);
   cursor: none;
+  padding-right: 3rem;
 }
 
-.hamburger span {
+.nav-ham span {
   display: block;
   width: 22px;
   height: 1.5px;
   background: var(--text-1);
   border-radius: 1px;
-  transition: all 0.35s var(--transition);
   transform-origin: center;
 }
 
-.hamburger.open span:nth-child(1) {
-  transform: translateY(6.5px) rotate(45deg);
+/* ── Close button (×) ── */
+.nav-x {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  color: var(--text-1);
+  cursor: none;
+  transition: color 0.15s ease-out;
 }
 
-.hamburger.open span:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0);
-}
-
-.hamburger.open span:nth-child(3) {
-  transform: translateY(-6.5px) rotate(-45deg);
+.nav-x:hover {
+  color: var(--text-0);
 }
 
 /* ════════════════════════════════════════════
@@ -1267,19 +1272,22 @@ h4 {
 .stk-scan {
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    transparent 0,
-    transparent 2px,
-    rgba(255, 255, 255, 0.014) 2px,
-    rgba(255, 255, 255, 0.014) 4px
-  );
+  background: repeating-linear-gradient(to bottom,
+      transparent 0,
+      transparent 2px,
+      rgba(255, 255, 255, 0.014) 2px,
+      rgba(255, 255, 255, 0.014) 4px);
   animation: stkScan 10s linear infinite;
 }
 
 @keyframes stkScan {
-  from { background-position: 0 0; }
-  to   { background-position: 0 200px; }
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 200px;
+  }
 }
 
 .stk-orb {
@@ -1287,6 +1295,7 @@ h4 {
   border-radius: 50%;
   filter: blur(90px);
 }
+
 .stk-orb--1 {
   width: 45vw;
   height: 45vw;
@@ -1294,6 +1303,7 @@ h4 {
   right: -12%;
   background: radial-gradient(circle, rgba(124, 58, 237, 0.16) 0%, transparent 70%);
 }
+
 .stk-orb--2 {
   width: 38vw;
   height: 38vw;
@@ -1496,12 +1506,14 @@ h4 {
     gap: 1rem;
     padding: 1.4rem 0 1.4rem 1.2rem;
   }
+
   .stk-meta {
     flex-direction: row;
     align-items: center;
     gap: 0.6rem;
     flex-wrap: wrap;
   }
+
   .stk-bar {
     display: none;
   }
@@ -3326,7 +3338,7 @@ h4 {
 ════════════════════════════════════════════ */
 .footer {
   background: #050508;
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 /* 3-col body: brand (wide) | nav | contact */
@@ -3335,7 +3347,7 @@ h4 {
   grid-template-columns: 1.8fr 1fr 1.4fr;
   gap: 3rem;
   padding: 3.5rem 0 3rem;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 /* Brand column */
@@ -3348,7 +3360,10 @@ h4 {
   display: inline-block;
   margin-bottom: 1rem;
 }
-.ftr-logo .brand-dot { color: var(--primary); }
+
+.ftr-logo .brand-dot {
+  color: var(--primary);
+}
 
 .ftr-desc {
   font-size: 0.88rem;
@@ -3363,13 +3378,14 @@ h4 {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+
 .ftr-socials a {
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
   padding: 0.45rem 0.9rem;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 7px;
   font-size: 0.78rem;
   font-weight: 600;
@@ -3377,11 +3393,17 @@ h4 {
   transition: all 0.28s;
   cursor: none;
 }
-.ftr-socials a svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+.ftr-socials a svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
 .ftr-socials a:hover {
-  border-color: rgba(124,58,237,0.45);
+  border-color: rgba(124, 58, 237, 0.45);
   color: var(--primary-light);
-  background: rgba(124,58,237,0.09);
+  background: rgba(124, 58, 237, 0.09);
 }
 
 /* Column label */
@@ -3402,12 +3424,14 @@ h4 {
   flex-direction: column;
   gap: 0.7rem;
 }
+
 .ftr-nav a {
   font-size: 0.88rem;
   color: var(--text-2);
   transition: color 0.25s, padding-left 0.25s;
   cursor: none;
 }
+
 .ftr-nav a:hover {
   color: var(--text-0);
   padding-left: 6px;
@@ -3419,6 +3443,7 @@ h4 {
   flex-direction: column;
   gap: 0.7rem;
 }
+
 .ftr-citem {
   font-size: 0.82rem;
   color: var(--text-3);
@@ -3427,7 +3452,10 @@ h4 {
   cursor: none;
   word-break: break-all;
 }
-a.ftr-citem:hover { color: var(--text-0); }
+
+a.ftr-citem:hover {
+  color: var(--text-0);
+}
 
 /* Bottom bar */
 .ftr-bottom {
@@ -3445,20 +3473,28 @@ a.ftr-citem:hover { color: var(--text-0); }
 }
 
 .back-to-top {
-  width: 34px; height: 34px;
+  width: 34px;
+  height: 34px;
   border-radius: 8px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  display: flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--text-3);
   transition: all 0.3s;
   cursor: none;
 }
-.back-to-top svg { width: 15px; height: 15px; }
+
+.back-to-top svg {
+  width: 15px;
+  height: 15px;
+}
+
 .back-to-top:hover {
-  border-color: rgba(124,58,237,0.5);
+  border-color: rgba(124, 58, 237, 0.5);
   color: var(--primary-light);
-  background: rgba(124,58,237,0.09);
+  background: rgba(124, 58, 237, 0.09);
 }
 
 /* ════════════════════════════════════════════
@@ -3498,19 +3534,56 @@ a.ftr-citem:hover { color: var(--text-0); }
     grid-template-columns: 1fr;
   }
 
-  .ftr-body { grid-template-columns: 1fr 1fr; }
-  .ftr-brand-col { grid-column: 1 / -1; }
+  .ftr-body {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ftr-brand-col {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 768px) {
-  .nav-links {
-    position: fixed;
-    inset: 0;
+
+  /* Navbar expands to fill screen — lifts the entire stacking context above page content */
+  .navbar.nav-open {
+    height: 100dvh;
+    background: #05050a;
+    z-index: 9990;
+  }
+
+  /* Full-screen centered column when open */
+  .navbar.nav-open .nav-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     height: 100%;
-    background: rgba(5, 5, 8, 0.97);
-    backdrop-filter: blur(32px) saturate(1.6);
-    -webkit-backdrop-filter: blur(32px) saturate(1.6);
+    max-width: 100%;
+    padding: 0;
+  }
+
+  /* Hide brand logo when nav is open */
+  .navbar.nav-open .nav-brand {
+    display: none;
+  }
+
+  /* Pull nav-actions out of the flow so only the X button shows at top-right */
+  .navbar.nav-open .nav-actions {
+    position: fixed;
+    top: calc((var(--nav-h) - 2rem) / 2);
+    right: 0.5rem;
+    z-index: 9991;
+    margin: 0;
+  }
+
+  .nav-links {
+    position: static;
+    width: 100%;
+    height: auto;
+    background: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -3519,9 +3592,9 @@ a.ftr-citem:hover { color: var(--text-0); }
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.35s var(--ease), visibility 0.35s var(--ease);
+    transition: opacity 0.3s var(--ease), visibility 0.3s var(--ease);
     border: none;
-    z-index: 895;
+    z-index: auto;
   }
 
   .nav-links.open {
@@ -3593,12 +3666,25 @@ a.ftr-citem:hover { color: var(--text-0); }
 
   .nav-actions {
     margin-left: auto;
+    padding-right: 1.25rem;
   }
 
-  .hamburger {
+  /* Show hamburger, hide close by default */
+  .nav-ham {
     display: flex;
-    position: relative;
-    z-index: 901;
+  }
+
+  .nav-x {
+    display: none;
+  }
+
+  /* Swap when nav is open */
+  .navbar.nav-open .nav-ham {
+    display: none;
+  }
+
+  .navbar.nav-open .nav-x {
+    display: flex;
   }
 
   .about-grid {
@@ -3728,4 +3814,48 @@ a.ftr-citem:hover { color: var(--text-0); }
   .summary-divider {
     display: none;
   }
+}
+
+/* ════════════════════════════════════════════
+   MOBILE RENDER OPTIMISATION
+   All effects stay — just cheaper to composite
+════════════════════════════════════════════ */
+@media (max-width: 767px) {
+
+  /* Reduce backdrop-filter blur radius — still frosted, ~4x cheaper to sample */
+  .navbar,
+  .navbar.scrolled {
+    backdrop-filter: blur(10px) saturate(1.4);
+    -webkit-backdrop-filter: blur(10px) saturate(1.4);
+  }
+
+  .profile-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Reduce decorative blur radii — still blurred, half the spread = ~4x less work */
+  .svd-aurora {
+    filter: blur(28px);
+  }
+
+  .stk-orb--1,
+  .stk-orb--2 {
+    filter: blur(40px);
+  }
+
+  /* Promote animated elements to their own compositor layer upfront
+     so the browser doesn't repaint surrounding content each frame */
+  .svd-aurora,
+  .stk-scan,
+  .rd-cube--lg,
+  .rd-cube--md,
+  .rd-cube--sm,
+  .rd-ring3d--1,
+  .rd-ring3d--2,
+  .auroraDrift {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
 }
