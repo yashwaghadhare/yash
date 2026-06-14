@@ -369,7 +369,7 @@ h4 {
   justify-content: center;
   border-radius: var(--radius-sm);
   cursor: none;
-  padding-right: 3rem;
+  padding-right: 1.5rem;
 }
 
 .nav-ham span {
@@ -3733,7 +3733,7 @@ a.ftr-citem:hover {
   }
 
   .ctc-big {
-    font-size: clamp(2.4rem, 9vw, 3.5rem);
+    font-size: clamp(1.8rem, 7vw, 3.5rem);
   }
 
   .ctf-row {
