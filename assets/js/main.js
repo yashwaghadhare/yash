@@ -454,23 +454,6 @@ function updateActiveLink() {
   });
 })();
 
-/* ════════════════════════════════════════════
-   SERVICES — click arrow to expand
-════════════════════════════════════════════ */
-(function initServiceToggle() {
-  document.querySelectorAll('.svc-arr').forEach(function (arrow) {
-    arrow.addEventListener('click', function (e) {
-      e.stopPropagation();
-      var row = arrow.closest('.svc-row');
-      if (!row) return;
-      var isOpen = row.classList.contains('is-open');
-      document.querySelectorAll('.svc-row.is-open').forEach(function (r) {
-        r.classList.remove('is-open');
-      });
-      if (!isOpen) row.classList.add('is-open');
-    });
-  });
-})();
 
 /* ════════════════════════════════════════════
    CONTACT FORM
