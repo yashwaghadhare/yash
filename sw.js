@@ -1,15 +1,15 @@
 'use strict';
 
-var CACHE = 'yw-v1';
+var CACHE = 'yw-v12';
 
 var PRECACHE = [
   './',
   './index.html',
-  './assets/css/main.css',
-  './assets/js/main.js',
-  './assets/img/img1.png',
-  './assets/img/img11.png',
-  './assets/img/fevicon.ico',
+  './assets/css/main.css?v=12',
+  './assets/js/main.js?v=5',
+  './assets/img/yash-portrait.jpg',
+  './assets/img/yash-portrait.webp',
+  './assets/img/favicon.ico',
 ];
 
 /* ── Install: precache all local assets ── */
