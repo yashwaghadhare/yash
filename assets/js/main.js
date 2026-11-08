@@ -56,24 +56,20 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
-  // Note form: opens a pre-filled Gmail draft
+  // Message form: opens WhatsApp with the message pre-filled
   var form = document.getElementById('contact-form');
   var status = document.getElementById('form-status');
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var name = form.elements.name.value.trim();
-      var email = form.elements.email.value.trim();
       var message = form.elements.message.value.trim();
-      if (!name || !email || !message) return;
+      if (!name || !message) return;
 
-      var body = message + '\n\n' + name + '\n' + email;
-      var url = 'https://mail.google.com/mail/?view=cm&fs=1'
-        + '&to=contact.yashwaghadhare@gmail.com'
-        + '&su=' + encodeURIComponent('Hello from ' + name)
-        + '&body=' + encodeURIComponent(body);
+      var text = 'Hi Yash, this is ' + name + '.\n\n' + message;
+      var url = 'https://wa.me/919067228636?text=' + encodeURIComponent(text);
       window.open(url, '_blank', 'noopener');
-      if (status) status.textContent = 'Gmail opened in a new tab. Review the draft and press send.';
+      if (status) status.textContent = 'WhatsApp opened in a new tab. Press send there to deliver your message.';
       form.reset();
     });
   }

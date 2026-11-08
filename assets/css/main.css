@@ -106,6 +106,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .btn:hover { background: var(--ink); color: #fff; }
 .btn-accent { background: var(--accent); border-color: var(--accent); color: #fff; }
 .btn-accent:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+.btn-wa { background: #1fa855; border-color: #1fa855; color: #fff; }
+.btn-wa:hover { background: #178a45; border-color: #178a45; color: #fff; }
 
 /* ── Hero ─────────────────────────── */
 .hero {

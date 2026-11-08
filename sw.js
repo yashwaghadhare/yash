@@ -1,12 +1,12 @@
 'use strict';
 
-var CACHE = 'yw-v12';
+var CACHE = 'yw-v13';
 
 var PRECACHE = [
   './',
   './index.html',
-  './assets/css/main.css?v=12',
-  './assets/js/main.js?v=5',
+  './assets/css/main.css?v=13',
+  './assets/js/main.js?v=6',
   './assets/img/yash-portrait.jpg',
   './assets/img/yash-portrait.webp',
   './assets/img/favicon.ico',
